@@ -29,6 +29,7 @@ public class InertiaAntiCheatClient implements ClientModInitializer {
     public void onInitializeClient() {
         ClientPlayNetworking.registerGlobalReceiver(InertiaAntiCheatConstants.REQUEST_PACKET_ID, ModListRequestS2CPacket::receive);
         clientConfig = InertiaAntiCheat.initializeConfig("/config/client/InertiaAntiCheat.toml", CURRENT_CLIENT_CONFIG_VERSION);
+        InertiaAntiCheatClient.hiddenMods = clientConfig.getList("mods.hiddenMods");
         debugInfo("Initializing E2EE...");
         clientE2EESecretKey = initializeE2EE();
     }
