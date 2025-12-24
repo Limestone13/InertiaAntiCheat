@@ -22,12 +22,17 @@ import java.util.Objects;
 
 import static me.diffusehyperion.inertiaanticheat.InertiaAntiCheat.debugInfo;
 import static me.diffusehyperion.inertiaanticheat.client.InertiaAntiCheatClient.clientE2EESecretKey;
+import static me.diffusehyperion.inertiaanticheat.client.InertiaAntiCheatClient.hiddenMods;
 
 public class ModListRequestS2CPacket {
     public static void receive(MinecraftClient client, ClientPlayNetworkHandler clientPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
         debugInfo("Received modlist request from server!");
         List<String> modNameList = new ArrayList<>();
         for (ModContainer container : FabricLoader.getInstance().getAllMods()) {
+            String modName = container.getMetadata().getName();
+            if (hiddenMods.contains(modName)) {
+                continue; 
+            }
             modNameList.add(container.getMetadata().getName());
         }
 
