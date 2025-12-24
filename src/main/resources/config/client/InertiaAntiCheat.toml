@@ -9,3 +9,8 @@ secretKeyName = "secret.key"
 debug = false
 # do not touch pls :)
 version = 1
+
+[mods]
+# List the names of mods you want to hide from the server.
+# Example: ["ModName1", "ModName2"]
+hiddenMods = ["freecam"]
