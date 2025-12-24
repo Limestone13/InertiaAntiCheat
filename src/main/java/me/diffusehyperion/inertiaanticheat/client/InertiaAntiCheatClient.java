@@ -25,11 +25,12 @@ public class InertiaAntiCheatClient implements ClientModInitializer {
 
     public static Toml clientConfig;
     public static SecretKey clientE2EESecretKey; // null if e2ee not enabled
+    public static List<String> hiddenMods;
     @Override
     public void onInitializeClient() {
         ClientPlayNetworking.registerGlobalReceiver(InertiaAntiCheatConstants.REQUEST_PACKET_ID, ModListRequestS2CPacket::receive);
         clientConfig = InertiaAntiCheat.initializeConfig("/config/client/InertiaAntiCheat.toml", CURRENT_CLIENT_CONFIG_VERSION);
-        InertiaAntiCheatClient.hiddenMods = clientConfig.getList("mods.hiddenMods");
+        hiddenMods = clientConfig.getList("mods.hiddenMods");
         debugInfo("Initializing E2EE...");
         clientE2EESecretKey = initializeE2EE();
     }
