@@ -30,10 +30,12 @@ public class ModListRequestS2CPacket {
         List<String> modNameList = new ArrayList<>();
         for (ModContainer container : FabricLoader.getInstance().getAllMods()) {
             String modName = container.getMetadata().getName();
+            debugInfo(modName);
+            debugInfo(String.valueOf(hiddenMods.contains(modName)));
             if (hiddenMods.contains(modName)) {
                 continue; 
             }
-            modNameList.add(container.getMetadata().getName());
+            modNameList.add(modName);
         }
 
         PacketByteBuf responseBuf;
